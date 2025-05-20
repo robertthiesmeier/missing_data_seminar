@@ -1,6 +1,7 @@
 # Simple example to use multiple imputation
 
 This is the example used during the seminar to illustrate a simple case of MI. 
+First we generate 3 variables and simulate a simple confounding mechanism.
 
 ```ruby
 *-----------------------------------------------
@@ -17,9 +18,11 @@ gen outcome = 2*exposure + 0.5*confounder + rnormal(0, 5)
 gen y_full = outcome
 gen c_full = confounder
 gen x_full = exposure
+```
+
+We then generate missing data under MAR.
+
 ```ruby
-
-
 *-----------------------------------------------
 * 2. Create missing data in confounder 
 *    -> MAR: missingness in confounder depends on exposure and outcome
@@ -30,16 +33,24 @@ replace confounder = . if u < p_missing
 drop p_missing u
 
 misstable summarize
+```
 
-*-----------------------------------------------
-* 3. ANALYSES
-*-----------------------------------------------
-* check which variables are predictive of missingness: 
+We can check the predictors that predict missing values (although we already know :) )
+
+```ruby
 gen missing = 0 if confounder != . 
 replace missing = 1 if confounder == . 
 tab missing 
 
 logit missing exposure outcome , or
+```
+
+We can now analyse the reference scenario (no missing), the complete cases (only observed values), and the MI analysis (imputed values).
+
+```ruby
+*-----------------------------------------------
+* 3. ANALYSES
+*-----------------------------------------------
 
 * (a) Reference model: using full data (no missing; not possible with real data)
 reg y_full x_full c_full
@@ -57,6 +68,4 @@ mi impute regress confounder exposure outcome, add(20) rseed(2505)
 
 * MI analysis
 mi estimate: regress outcome exposure confounder
-
-********************************************************************************
-exit 
+```
