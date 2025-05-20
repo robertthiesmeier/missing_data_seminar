@@ -1,6 +1,8 @@
 # Simple example to use multiple imputation
 
+This is the example used during the seminar to illustrate a simple case of MI. 
 
+```ruby
 *-----------------------------------------------
 * 1. Generate data
 *-----------------------------------------------
@@ -15,6 +17,8 @@ gen outcome = 2*exposure + 0.5*confounder + rnormal(0, 5)
 gen y_full = outcome
 gen c_full = confounder
 gen x_full = exposure
+```ruby
+
 
 *-----------------------------------------------
 * 2. Create missing data in confounder 
