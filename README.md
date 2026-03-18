@@ -71,3 +71,6 @@ mi impute regress confounder exposure outcome, add(20) rseed(2505)
 * MI analysis
 mi estimate: regress outcome exposure confounder
 ```
+
+*** full analysis without missing data from this sample of data as a benchmark ***
+reg y_full x_full c_full
