@@ -5,9 +5,10 @@ This is the example used during the lecture to illustrate a simple case of multi
 🔰 First we generate 3 variables and simulate a simple confounding mechanism.
 
 ```ruby
-*-----------------------------------------------
+***
 * 1. Generate data
-*-----------------------------------------------
+***
+
 clear
 set seed 250520
 set obs 1000
@@ -24,10 +25,10 @@ gen x_full = exposure
 🔰 We then generate missing data under MAR.
 
 ```ruby
-*-----------------------------------------------
+***
 * 2. Create missing data in confounder 
-*    -> MAR: missingness in confounder depends on exposure and outcome
-*-----------------------------------------------
+*    MAR: missingness in confounder depends on exposure and outcome
+***
 gen p_missing = invlogit(-1 + 1.5*exposure + 0.03*outcome) 
 gen u = runiform()
 replace confounder = . if u < p_missing
@@ -49,9 +50,9 @@ logit missing exposure outcome , or
 🔰 We can now analyse the reference scenario (no missing), the complete cases (only observed values), and the MI analysis (imputed values).
 
 ```ruby
-*-----------------------------------------------
+***
 * 3. ANALYSES
-*-----------------------------------------------
+***
 
 * (a) Reference model: using full data (no missing; not possible with real data)
 reg y_full x_full c_full
