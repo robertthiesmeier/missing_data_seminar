@@ -1,6 +1,6 @@
 # Simple example to use multiple imputation
 
-This is the example used during the seminar to illustrate a simple case of MI. 
+This is the example used during the lecture to illustrate a simple case of multiple imputation. 
 
 🔰 First we generate 3 variables and simulate a simple confounding mechanism.
 
